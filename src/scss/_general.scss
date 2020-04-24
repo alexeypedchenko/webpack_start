@@ -1,0 +1,60 @@
+body {
+  font-family: $font-family;
+  font-weight: $font-weight;
+  font-size: $font-size;
+  color: $black-cl;
+  line-height: $line-height;
+  margin: 0;
+  overflow-x: hidden;
+  overscroll-behavior: none
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin-top: 0;
+  font-weight: 400;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: $font-family;
+}
+
+button {
+  font-family: $font-family;
+  padding: 0;
+  border: none;
+  background: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.container {
+  width: 1140px;
+  max-width: 100%;
+  margin: 0 auto;
+
+  @include max(1200) {
+    width: 900px;
+  }
+}
+
+.img-resp {
+  max-width: 100%;
+  width: 600px;
+  height: auto;
+  display: block;
+
+  @include max(1200) {
+    width: 400px;
+  }
+}
+
+.indent {
+  height: 50vh;
+  border: 3px dashed blue;
+}

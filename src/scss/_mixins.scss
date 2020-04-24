@@ -1,0 +1,58 @@
+@mixin font-face($font-family, $file-path, $weight: normal, $style: normal) {
+  @font-face {
+    font-family: $font-family;
+    src: url('#{$file-path}.ttf');
+    // src: url('#{$file-path}.eot?#iefix') format('embedded-opentype'), url('#{$file-path}.woff') format('woff'), url('#{$file-path}.ttf') format('truetype');
+    font-weight: $weight;
+    font-style: $style;
+    font-display: swap;
+  }
+}
+
+
+// < adaptive
+// $breakpoints: (xs: 375, sm: 414, md: 768, lg: 1024);
+$breakpoints: (xs: 400, sm: 600, md: 1000, lg: 1200);
+@mixin max($size) {
+  @if map-has-key($breakpoints, $size) {
+    @media (max-width: #{map-get($breakpoints, $size)}px) {
+      @content;
+    }
+  } @else {
+    @media (max-width: #{$size}px) {
+      @content;
+    }
+  }
+};
+
+@mixin min($size) {
+  @if map-has-key($breakpoints, $size) {
+    @media (min-width: #{map-get($breakpoints, $size)}px) {
+      @content;
+    }
+  } @else {
+    @media (min-width: #{$size}px) {
+      @content;
+    }
+  }
+};
+
+// < px to vw
+$layout-width: 1440;
+@function vw($px) {
+  $vw-context: ($layout-width*.01) * 1px;
+  @return ($px/$vw-context) * 1vw;
+};
+
+//percent minus vw
+@function percent-m-vw($percent, $px) {
+  $vw-context: ($layout-width*.01) * 1px;
+  @return unquote(('calc('+ $percent + ' - ' + ($px/$vw-context) * 1vw +')'));
+}
+
+//percent plus vw
+@function percent-p-vw($percent, $px) {
+  $vw-context: ($layout-width*.01) * 1px;
+  @return unquote(('calc('+ $percent + ' + ' + ($px/$vw-context) * 1vw +')'));
+}
+// px to vw />
